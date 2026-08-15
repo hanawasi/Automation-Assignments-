@@ -1,0 +1,218 @@
+{
+  "info": {
+    "_postman_id": "33fdef9f-d329-4587-a054-122a694c4386",
+    "name": "API testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57077659",
+    "_collection_link": "https://go.postman.co/collection/57077659-33fdef9f-d329-4587-a054-122a694c4386?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "for all users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "user with specific id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/3",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "new user",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n        \"userId\": 11,\r\n        \"title\": \"I am a new user\",\r\n        \"body\": \"cupiditate quo est a modi nesciunt soluta\\nipsa voluptas error itaque dicta in\\nautem qui minus magnam et distinctio eum\\naccusamus ratione error aut\"\r\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update id 4 user",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \r\n    \"title\": \"my data has been updated\",\r\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/4",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete id 5 user",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \r\n    \"title\": \"my data has been updated\",\r\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\r\n}"
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/5",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code check\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"status code check\", function () {\r",
+              "    pm.response.to.have.status(400)\r",
+              "})\r",
+              "\r",
+              "pm.test(\"response time check\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(400)\r",
+              "})\r",
+              "\r",
+              "pm.test(\"response time check\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(10)\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Response structure validation\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "\r",
+              "    pm.expect(data[0]).to.have.property(\"userId\");\r",
+              "    pm.expect(data[0]).to.have.property(\"title\");\r",
+              "    pm.expect(data[0]).to.have.property(\"body\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate response fields and values\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "\r",
+              "    pm.expect(data[0]).to.have.property(\"id\");\r",
+              "    pm.expect(data[0].id).to.eql(1);\r",
+              "\r",
+              "    pm.expect(data[0]).to.have.property(\"userId\");\r",
+              "    pm.expect(data[0].userId).to.eql(1);\r",
+              "\r",
+              "    pm.expect(data[0]).to.have.property(\"title\");\r",
+              "    pm.expect(data[0].title).to.be.a(\"string\");\r",
+              "\r",
+              "    pm.expect(data[0]).to.have.property(\"body\");\r",
+              "    pm.expect(data[0].body).to.be.a(\"string\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
